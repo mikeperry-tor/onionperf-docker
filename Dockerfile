@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:stretch
 
 MAINTAINER Silvia Puglisi [Hiro] <hiro@torproject.org>
 WORKDIR /$APPROOT
@@ -6,9 +6,9 @@ WORKDIR /$APPROOT
 RUN apt-get update -qq
 RUN apt-get upgrade -y
 RUN apt-get install -y --fix-missing wget git gcc g++ automake cmake make libglib2.0 libglib2.0-dev \
-                       libigraph0 libigraph0-dev libevent-dev openssl libssl-dev python
+                       libigraph0 libigraph0-dev libevent-dev openssl libssl-dev python pypy
 
-RUN git clone https://git.torproject.org/tor.git -b release-0.3.0
+RUN git clone https://git.torproject.org/tor.git
 WORKDIR /tor
 RUN ./autogen.sh
 RUN ./configure --disable-asciidoc
@@ -35,3 +35,8 @@ RUN python setup.py install
 
 RUN apt-get install -y nginx
 RUN mkdir /etc/nginx/ssl
+
+WORKDIR /$APPROOT
+RUN git clone https://github.com/mikeperry-tor/vanguards.git
+WORKDIR /vanguards
+RUN pypy setup.py install
