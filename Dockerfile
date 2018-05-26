@@ -6,7 +6,7 @@ WORKDIR /$APPROOT
 RUN apt-get update -qq
 RUN apt-get upgrade -y
 RUN apt-get install -y --fix-missing wget git gcc g++ automake cmake make libglib2.0 libglib2.0-dev \
-                       libigraph0 libigraph0-dev libevent-dev openssl libssl-dev python pypy
+                       libigraph0v5 libigraph0-dev libevent-dev openssl libssl-dev python
 
 RUN git clone https://git.torproject.org/tor.git
 WORKDIR /tor
@@ -29,7 +29,7 @@ RUN git clone https://github.com/robgjansen/onionperf.git
 WORKDIR /onionperf
 RUN apt-get install -y python-dev libxml2 libxml2-dev libxslt1-dev \
                        libpng-dev libfreetype6
-RUN pip install stem lxml twisted networkx scipy numpy matplotlib
+RUN pip install stem==1.5.4 lxml twisted networkx scipy numpy matplotlib
 RUN python setup.py build
 RUN python setup.py install
 
@@ -38,5 +38,6 @@ RUN mkdir /etc/nginx/ssl
 
 WORKDIR /$APPROOT
 RUN git clone https://github.com/mikeperry-tor/vanguards.git
+RUN apt-get install pypy pypy-setuptools netcat-traditional
 WORKDIR /vanguards
 RUN pypy setup.py install

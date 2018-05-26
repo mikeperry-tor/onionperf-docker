@@ -1,5 +1,11 @@
 #!/bin/sh -e
 cd /home/cloud/onionperf;
 onionperf measure --tor=/home/cloud/tor/src/or/tor --tgen=/home/cloud/shadow/src/plugin/shadow-plugin-tgen/build/tgen --tgen-listen-port 8080 --tgen-connect-port 80 --twistd=/usr/local/bin/twistd &
-sleep 2 # XXX: Wait for control port
+nc -z localhost 9051
+while [ ! $? ]
+do
+  echo "Control port not running yet..."
+  nc -z localhost 9051
+  sleep 1
+done
 vanguards --loglevel INFO --logfile vanguards.log &
