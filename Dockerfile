@@ -25,7 +25,7 @@ RUN make
 WORKDIR /$APPROOT
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
-RUN git clone https://github.com/robgjansen/onionperf.git
+RUN git clone https://github.com/mikeperry-tor/onionperf -b vanguard_testing
 WORKDIR /onionperf
 RUN apt-get install -y python-dev libxml2 libxml2-dev libxslt1-dev \
                        libpng-dev libfreetype6
