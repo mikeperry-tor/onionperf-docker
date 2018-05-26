@@ -38,6 +38,6 @@ RUN mkdir /etc/nginx/ssl
 
 WORKDIR /$APPROOT
 RUN git clone https://github.com/mikeperry-tor/vanguards.git
-RUN apt-get install pypy pypy-setuptools netcat-traditional
+RUN apt-get install -y pypy pypy-setuptools netcat-traditional
 WORKDIR /vanguards
 RUN pypy setup.py install
