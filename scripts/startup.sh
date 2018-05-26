@@ -11,10 +11,10 @@ onionperf measure --tor=/tor/src/or/tor --tgen=/shadow/src/plugin/shadow-plugin-
 #twistd --version
 #/usr/local/bin/twistd -n -l - web  --path /onionperf/onionperf-data/twistd/docroot --port tcp:8090 --mime-type=None
 nc -z localhost 9051
-while [ ! $? ]
+while [ $? -eq 1 ]
 do
   echo "Control port not running yet..."
-  nc -z localhost 9051
   sleep 1
+  nc -z localhost 9051
 done
 vanguards --loglevel INFO #--logfile vanguards.log
