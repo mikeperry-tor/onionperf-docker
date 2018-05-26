@@ -17,4 +17,4 @@ do
   sleep 1
   nc -z localhost 9051
 done
-vanguards --loglevel INFO #--logfile vanguards.log
+vanguards --config /vanguards/tests/2-4-8-perf.conf #--logfile vanguards.log
