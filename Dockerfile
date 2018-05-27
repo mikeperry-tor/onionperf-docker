@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y --fix-missing wget git gcc g++ automake cmake make libglib2.0 libglib2.0-dev \
                        libigraph0v5 libigraph0-dev libevent-dev openssl libssl-dev python
 
-RUN git clone https://git.torproject.org/tor.git
+RUN git clone //github.com/mikeperry-tor/tor -b bug26214
 WORKDIR /tor
 RUN ./autogen.sh
 RUN ./configure --disable-asciidoc
