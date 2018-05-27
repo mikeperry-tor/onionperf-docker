@@ -17,4 +17,9 @@ do
   sleep 1
   nc -z localhost 9051
 done
+while [ ! -f "/onionperf/onionperf-data/tor-server/cached-microdesc-consensus" ]
+do
+  echo "No consensus yet..."
+  sleep 1
+done
 vanguards --config /vanguards/tests/2-4-8-perf.conf #--logfile vanguards.log
